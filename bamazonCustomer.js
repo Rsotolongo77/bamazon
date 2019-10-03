@@ -1,5 +1,6 @@
 var mysql = require("mysql");
 var inquirer = require("inquirer");
+var totalCost = 0;
 
 var connection = mysql.createConnection({
     host: "localhost",
@@ -28,18 +29,18 @@ function loadProducts() {
         console.table(res);
 
         //then prompt the customer to choice of item
-        promptCustomerForItem(res)
+        promptCustomerOrder(res)
     })
 }
 
 //prompt the customer for a product id
-function promptCustomerForItem() {
+function promptCustomerOrder() {
     return inquirer.prompt([{
-        name: "item",
+        name: "itemId",
         message: "Please enter the id of the item you would like to purchase.",
         type: "input",
         validate: function (value) {
-            if ((isNaN(value) === false) && (value <= numberOfProductTypes)) {
+            if (isNaN(value) === false) {
                 return true;
             } else {
                 console.log("Please enter valid itme id");
@@ -63,22 +64,7 @@ function promptCustomerForItem() {
 
 
 
-//prompt customer for quantity
-function promptCustomerForQuantity()
 
 
-
-//purchase function to buy desired item
-function makePurchase()
-
-
-
-//check inventory to see if userchoice exist in db
-function checkInventory()
-
-
-
-//function adding exit if user wants to quit
-function checkUserQuit()
 
 
