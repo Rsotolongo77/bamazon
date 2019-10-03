@@ -59,12 +59,17 @@ function promptCustomerOrder() {
                 return false;
             }
         }
-    }])
-}
+    }]).then(function (answer) {
+        connection.query("SELECT  * FROM products WHERE ?",
+            { item_id: answer.itemId }, function (err, res) {
 
+                if (err) throw err;
 
-
-
-
-
-
+                if (answer.quantity > res[0].stock_quantity) {
+                    inquirer
+                        .prompt([
+                            {
+                                name: "orderAgain",
+                                type: "input",
+                                message: "Sorry, not enough quantity in stock to fulfill your order. Would you like to place another order?"
+                            }
