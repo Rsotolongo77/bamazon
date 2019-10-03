@@ -33,7 +33,33 @@ function loadProducts() {
 }
 
 //prompt the customer for a product id
-function promptCustomerForItem()
+function promptCustomerForItem() {
+    return inquirer.prompt([{
+        name: "item",
+        message: "Please enter the id of the item you would like to purchase.",
+        type: "input",
+        validate: function (value) {
+            if ((isNaN(value) === false) && (value <= numberOfProductTypes)) {
+                return true;
+            } else {
+                console.log("Please enter valid itme id");
+                return false;
+            }
+        }
+    }, {
+        name: "quantity",
+        message: "How many would you like to buy?",
+        type: "input",
+        validate: function (value) {
+            if (isNaN(value) === false) {
+                return true;
+            } else {
+                console.log("Please enter valid quantity amount.");
+                return false;
+            }
+        }
+    }])
+}
 
 
 
