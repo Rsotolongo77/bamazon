@@ -33,7 +33,7 @@ function loadProducts() {
     });
 }
 
-//prompt the customer for a product id
+//prompt the customer for a product id and quantity
 function promptCustomerOrder() {
     return inquirer.prompt([{
         name: "itemId",
@@ -58,12 +58,13 @@ function promptCustomerOrder() {
                 return false;
             }
         }
+        //link user answer to db table    
     }]).then(function (answer) {
         connection.query("SELECT  * FROM products WHERE ?",
             { item_id: answer.itemId }, function (err, res) {
 
                 if (err) throw err;
-
+                //check for sufficient quantity for order, and option to reorder if quantity desired not available 
                 if (answer.quantity > res[0].stock_quantity) {
                     inquirer
                         .prompt([
@@ -81,6 +82,7 @@ function promptCustomerOrder() {
                             }
                         });
                 }
+                //total cost or order and adjust quantity to db for item_id
                 else {
                     totalCost = totalCost + res[0].price * answer.quantity;
                     var newQuantity = res[0].stock_quantity - answer.quantity;
