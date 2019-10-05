@@ -17,7 +17,7 @@ connection.connect(function (err) {
     if (err) {
         console.log("error connect".err.stack)
     }
-})
+});
 loadProducts()
 
 //function to load products from db
@@ -30,7 +30,7 @@ function loadProducts() {
 
         //then prompt the customer to choice of item
         promptCustomerOrder(res)
-    })
+    });
 }
 
 //prompt the customer for a product id
@@ -43,7 +43,7 @@ function promptCustomerOrder() {
             if (isNaN(value) === false) {
                 return true;
             } else {
-                console.log("Please enter valid itme id");
+                console.log("Please enter valid item id");
                 return false;
             }
         }
@@ -55,7 +55,6 @@ function promptCustomerOrder() {
             if (isNaN(value) === false) {
                 return true;
             } else {
-                console.log("Please enter valid quantity amount.");
                 return false;
             }
         }
@@ -71,5 +70,33 @@ function promptCustomerOrder() {
                             {
                                 name: "orderAgain",
                                 type: "input",
-                                message: "Sorry, not enough quantity in stock to fulfill your order. Would you like to place another order?"
+                                message: "Sorry, insufficient quantity in stock to fulfill your order. Would you like to place another order?"
                             }
+                        ]).then(function (answer) {
+                            if (answer.orderAgain == "yes") {
+                                promptCustomerOrder();
+                            } else if (totalCost >= 0) {
+                                console.log("Okay, thanks for visiting and come back soon!");
+                                connection.end();
+                            }
+                        });
+                }
+                else {
+                    totalCost = totalCost + res[0].price * answer.quantity;
+                    var newQuantity = res[0].stock_quantity - answer.quantity;
+                    connection.query(`UPDATE products SET stock_quantity=${newQuantity} WHERE item_id = ${answer.itemId}`, function (res) {
+                        {
+                            console.log("Okay, Total to pay is  $", totalCost);
+                            connection.end();
+                        }
+
+                    });
+
+                }
+
+            });
+    });
+
+}
+
+
