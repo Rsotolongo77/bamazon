@@ -71,7 +71,7 @@ function promptCustomerOrder() {
                             {
                                 name: "orderAgain",
                                 type: "input",
-                                message: "Sorry, insufficient quantity in stock to fulfill your order. Would you like to place another order?"
+                                message: "Sorry, insufficient quantity in stock to fullfill your order. Would you like to place another order?"
                             }
                             //option to quit for user if they don't want to adjust order.
                         ]).then(function (answer) {
