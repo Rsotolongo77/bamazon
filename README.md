@@ -14,5 +14,17 @@
 4. The quantity inserted by the user is then checked against the quantity available in stock. If insufficient quantity is determined to fullfill order, the user is given notice of so and given the opportunity to order again or quit the user interface. 
 5. If the order proceeds with quantity checked as sufficient the user is then given the total price for the order. The inventory number is adjusted accordingly off the database to reflect the new and accurate inventory quantity. 
 
+![ ](images/1.png)
 
+![ ](images/2.png)
+
+![ ](images/3.png)
+
+![ ](images/4.png)
+
+![ ](images/5.png)
+
+![ ](images/6.png)
+
+![ ](images/7.png)
 
