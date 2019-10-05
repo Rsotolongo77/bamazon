@@ -22,7 +22,7 @@ loadProducts()
 
 //function to load products from db
 function loadProducts() {
-    connection.query("SELECT * FROM products", function (err, res) {
+    connection.query("SELECT item_id, product_name, department_name, price FROM products", function (err, res) {
         if (err) throw err
 
         //display items in a table
