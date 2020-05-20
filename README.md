@@ -28,4 +28,4 @@
 
 ![ ](images/7.png)
 
-https://drive.google.com/file/d/1YoHlVRhlgahaHqueZa24M6Zik3Jz9Hzn/view
+
